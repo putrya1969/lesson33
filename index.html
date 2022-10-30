@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>Registration form</h2>
+    <form action="/action_page.php">
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <h2>Login form</h2>
+    <form>
+        <label for="login">Enter your login</label><br>
+        <input type="text" id="login" name="login"><br><br>
+        <label for="pass">Enter your password</label><br>
+        <input type="password" id="pass" name="pass"><br><br>
+        <input type="submit" value="Registration">
+    </form>
+    <h2>Question form</h2>
+    <form onsubmit="return checkAnswer(this, 'C')">
+        <label>What is C#?</label><br><br>
+        <input type="radio" value="A" name="cc">Some like C++<br>
+        <input type="radio" value="B" name="cc">Type of knife sharpner<br>
+        <input type="radio" value="C" name="cc">Mostly popular programming language<br><br>
+        <input type="submit" value="Check answer"><br>
+    </form>
+    <h2>Order form</h2>
+    <!-- <form id="formOrder" onsubmit="getProducts(this)"> -->
+    <form id="formOrder"></form>
+        <p>
+            <label>Select product for preorder</label><br>
+            <input type="checkbox" id="bread" value="bread">
+            <label for="bread">Bread</label><br>
+            <input type="checkbox" id="butter" value="butter">
+            <label for="bread">Butter</label><br>
+            <input type="checkbox" id="milk" value="milk">
+            <label for="bread">Milk</label><br>
+            <input type="checkbox" id="eggs" value="eggs">
+            <label for="bread">Eggs</label>
+        </p>
+        <!-- <input type="submit" value="Preorder products"> -->
+        <button type="button" onclick="buyProducts()">Get product</button>
+        <p>
+            <label>Products order</label><br>
+            <!-- <textarea id="orderList" rows="7" cols="20" placeholder="There is place for your products"></textarea> -->
+            <textarea id="orderList" rows="7" cols="20"></textarea>
+        </p>
+
+    </form>
+    <script>
+        function checkAnswer(quizForm, theAnswer){
+            var answer = '?';
+            var i = 0;
+            for(; i < quizForm.elements.length ; i++ )
+            {
+                if(("cc" == quizForm.elements[i].name) && (quizForm.elements[i].checked))
+                {
+                    answer = quizForm.elements[i].value;
+                }
+            }
+            if (answer == '?')
+            {
+                alert("Please make selection");
+                return false;
+            }
+            if (answer == theAnswer){
+                alert("'" + answer + "' is correct!");
+            }
+            else{
+                alert("'" + answer + "' is incorrect!");
+            }
+            return true;
+        }
+        function buyProducts() {
+            const orderForm = document.getElementById("formOrder");
+            var productsForOrder = '';
+            var i = 0;
+            for (; i < orderForm.elements.length; i++) {
+                if ((orderForm.elements[i].type == "checkbox") && (orderForm.elements[i].checked)) {
+                    if (productsForOrder != ''){
+                        productsForOrder += ", " + orderForm.elements[i].value + "\n";
+                    }
+                    else{
+                        productsForOrder = orderForm.elements[i].value;
+                    }
+                }
+            }
+            alert(productsForOrder);
+            //document.getElementById("orderList").value = productsForOrder;
+            var listProduct = document.getElementById("orderList");
+            listProduct.value = productsForOrder;
+            console.log(productsForOrder);
+        }
+        function getProducts(orderForm) {
+            
+            var productsForOrder = '';
+            var i = 0;
+            for (; i < orderForm.elements.length; i++) {
+                if ((orderForm.elements[i].type == "checkbox") && (orderForm.elements[i].checked)) {
+                    if (productsForOrder != ''){
+                        productsForOrder += ", " + orderForm.elements[i].value + "\n";
+                    }
+                    else{
+                        productsForOrder = orderForm.elements[i].value;
+                    }
+                }
+            }
+            alert(productsForOrder);
+            var listProduct = document.getElementById("orderList");
+            listProduct.value = productsForOrder;
+            console.log(productsForOrder);
+        }
+    </script>
+</body>
+
+</html>
